@@ -32,6 +32,7 @@ public class EmployeeApplication {
                            switch (adminOpt){
                                // done
                                case 1 -> {
+                                   DisplayUtil.printNewLine("---------------------------------------------------- EMPLOYEE LIST ----------------------------------------------------");
                                    DisplayUtil.table(employeeService.ViewAllEmployee());
                                }
                                // not yet done
@@ -47,7 +48,8 @@ public class EmployeeApplication {
                                                    |-----------------------|
                                                    """);
                                            Integer id = InputUtil.getInteger("Enter ID to search the Employee : ");
-                                           DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
+                                           Employee employee = employeeService.SearchEmployeeByID(id) ;
+                                           DisplayUtil.tableForNonCount(employee);
                                        }
                                        case 2 -> {
                                            String name = InputUtil.getText("Enter the Employee name : ");
@@ -58,7 +60,15 @@ public class EmployeeApplication {
                                }
                                // not yet
                                case 3 -> {
-                                   DisplayUtil.printSameLine("case3");
+                                   DisplayUtil.printNewLine("""
+                                                   |---------------------------------------|
+                                                   |      Rating Employee Performance      |               
+                                                   |---------------------------------------|
+                                                   """);
+                                   Integer id = InputUtil.getInteger("Enter Employee ID : ") ;
+                                   DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
+                                   Integer percentage = InputUtil.getInteger("Enter their performance 0 -> 100% : ");
+                                   employeeService.ratingEmployee(id , percentage);
                                }
                                // done
                                case 4 -> {
@@ -184,7 +194,7 @@ public class EmployeeApplication {
                                    Double salary = InputUtil.getDouble("Enter the Employee salary : ");
                                    String userName = InputUtil.getText("Enter the Employee Login userName : ");
                                    String pw = InputUtil.getText("Enter the Emplopyee password : ");
-                                   Boolean attendance = true ;
+                                   String attendance = "Not yet take attendance" ;
                                    Employee newEmployee = new Employee(name , age , nationality , gender , department , position , salary, attendance);
                                    employeeService.addEmployee(newEmployee);
                                    newEmployee.setUserName(userName);
@@ -323,7 +333,7 @@ public class EmployeeApplication {
                                    Double salary = InputUtil.getDouble("Enter the Employee salary : ");
                                    String userName = InputUtil.getText("Enter the Employee Login userName : ");
                                    String pw = InputUtil.getText("Enter the Emplopyee password : ");
-                                   Boolean attendance = true ;
+                                   String attendance = "Not yet take attendance" ;
                                    Employee newEmployee = new Employee(name , nationality , gender , department , position , salary, attendance , userName , pw);
                                    employeeService.updateEmployeeByID(id , newEmployee);
                                    DisplayUtil.showSuccessMsg("Student updated");
@@ -376,18 +386,125 @@ public class EmployeeApplication {
                                                    |---------------------------------|
                                                    """);
                                    DisplayUtil.PositionList();
+                                   Integer opt = InputUtil.getInteger("Enter your option : ");
+                                   switch (opt){
+                                       case 1 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position HR Manager");
+                                           DisplayUtil.table(employeeService.FilteringPosition("HR Manager"));
+                                       }
+                                       case 2 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Recruitment Officer");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Recruitment Officer"));
+                                       }
+                                       case 3 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Payroll Specialist");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Payroll Specialist"));
+                                       }
+                                       case 4 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Software Developer");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Software Developer"));
+                                       }
+                                       case 5 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position System Administator");
+                                           DisplayUtil.table(employeeService.FilteringPosition("System Administator"));
+                                       }
+                                       case 6 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position DevOps engineering");
+                                           DisplayUtil.table(employeeService.FilteringPosition("DevOps engineering"));
+                                       }
+
+                                       case 7 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Accountant");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Accountant"));
+                                       }
+                                       case 8 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Finacial Analyst");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Finacial Analyst"));
+                                       }
+                                       case 9 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Payroll officer");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Payroll officer"));
+                                       }
+                                       case 10 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Sales Executive");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Sales Executive"));
+                                       }
+                                       case 11 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Marketing Coordinator");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Marketing Coordinator"));
+                                       }
+                                       case 12 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Customer Relationship Manager");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Customer Relationship Manager "));
+                                       }
+                                       case 13 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Operations Manager");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Operations Manager"));
+                                       }
+                                       case 14 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Inventory Controller");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Inventory Controller"));
+                                       }
+                                       case 15 -> {
+                                           DisplayUtil.printNewLine("This is Employee in position Admin");
+                                           DisplayUtil.table(employeeService.FilteringPosition("Admin"));
+                                       }
+                                   }
                                }
                                // not yet
                                case 9 -> {
-                                   DisplayUtil.printSameLine("case9");
+                                   DisplayUtil.printNewLine("""
+                                                   |---------------------------|
+                                                   |     SALARY FILTERING      |      
+                                                   |---------------------------|
+                                                   """);
+                                   Double salary = InputUtil.getDouble("Enter Employee salary to search : ");
+                                   DisplayUtil.tableOneRow("1. ASC " , "2. DESC");
+                                   int opt = InputUtil.getInteger("Enter option: ");
+                                   Boolean isOrder = null;
+                                   if (opt == 1)
+                                       isOrder = true;
+                                   else if(opt == 2) {
+                                       isOrder = false;
+                                   } else {
+                                       System.out.println("option is invalid..!");
+                                   }
+                                   List<Employee> employees = employeeService.findEmployeeBySalary( salary, isOrder);
+                                   DisplayUtil.table(employees);
                                }
                                // not yet
                                case 10 -> {
-                                   DisplayUtil.printSameLine("case10");
+                                   DisplayUtil.printNewLine("""
+                                                   |---------------------------------------|
+                                                   |     EMPLOYEE ATTENDANCE OF THE DAY    |
+                                                   |---------------------------------------|
+                                                   """);
+                                   List<Employee> employees = employeeService.ViewAllEmployee();
+                                   DisplayUtil.tableForAttendance(employees);
                                }
                                // not yet
                                case 11 -> {
-                                   DisplayUtil.printSameLine("case11");
+                                   DisplayUtil.printNewLine("""
+                                                   |---------------------------------------|
+                                                   |     TAKE ATTENDANCE FOR EMPLOYEE      |
+                                                   |---------------------------------------|
+                                                   """);
+                                   Integer id = InputUtil.getInteger("Enter Employee ID to take the attendance : ");
+                                   Employee employee =  employeeService.SearchEmployeeByID(id);
+                                   DisplayUtil.tableForAttendanceAdmin();
+                                   Integer opt = InputUtil.getInteger("Enter your option : ");
+                                   switch (opt){
+                                       case 1 -> {
+                                           employee.setAttendance("PM");
+                                       }
+                                       case 2 -> {
+                                           employee.setAttendance("A");
+                                       }
+                                   }
+
+
+
+
                                }
                                case 0 -> backToMain = false;
                                default -> throw new IllegalStateException();
@@ -413,13 +530,44 @@ public class EmployeeApplication {
                            int EmployeeOpt = InputUtil.getInteger("Please Enter your option : ");
                            switch (EmployeeOpt){
                                case 1 -> {
-                                   DisplayUtil.printNewLine("case1");
+                                   DisplayUtil.printNewLine("""
+                                                   |-----------------------------------|
+                                                   |    YOUR ATTENDANCE FOR TODAY      |    
+                                                   |-----------------------------------|
+                                                   """);
+                                   DisplayUtil.printNewLine("Your attendance status : " + empLog.getAttendance());
                                }
                                case 2 -> {
-                                   DisplayUtil.printSameLine("case2");
+                                   String rating ;
+                                   if (empLog.getPerformancerating() != null) {
+                                       rating = empLog.getPerformancerating().toString() + "%";
+                                   } else {
+                                       rating = "not rating yet";
+                                   }
+                                   DisplayUtil.printNewLine("Dear " + empLog.getName() + " this is your rating : " + rating);
                                }
                                case 3 -> {
-                                   DisplayUtil.printSameLine("case3");
+                                   DisplayUtil.printNewLine("""
+                                                   |------------------------------|
+                                                   |     TAKE YOUR ATTENDANCE     |
+                                                   |------------------------------|
+                                                   """);
+                                   DisplayUtil.tableForAttendanceEmployee();
+                                   Integer opt = InputUtil.getInteger("Enter your option : ");
+                                   switch (opt){
+                                       case 1 -> {
+                                           empLog.setAttendance("P");
+                                       }
+                                       case 2 -> {
+                                           empLog.setAttendance("PL");
+                                       }
+                                       case 3 -> {
+                                           empLog.setAttendance("SL");
+                                       }
+                                       case 4 -> {
+                                           empLog.setAttendance("H");
+                                       }
+                                   }
                                }
                                case 0 -> backToMain = false;
                                default -> throw new IllegalStateException();

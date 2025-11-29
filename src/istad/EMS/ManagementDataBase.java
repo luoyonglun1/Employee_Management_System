@@ -19,10 +19,11 @@ public class ManagementDataBase {
         employee1.setNationality("Khmer");
         employee1.setPosition("Software Developer");
         employee1.setDepartment("Information Technology");
-        employee1.setAttendance(true);
+        employee1.setAttendance("P");
         employee1.setSalary(1500.00);
         employee1.setUserName("Employee");
         employee1.setPassword("emp123");
+        employee1.setPerformancerating(70);
 
 
         LocalDate emp2 = LocalDate.of(2004,5,20);
@@ -34,10 +35,11 @@ public class ManagementDataBase {
         employee2.setNationality("Khmer");
         employee2.setPosition("System Administator");
         employee2.setDepartment("Information Technology");
-        employee2.setAttendance(true);
+        employee2.setAttendance("P");
         employee2.setSalary(1700.00);
         employee2.setUserName("Employee2");
         employee2.setPassword("emp234");
+        employee2.setPerformancerating(70);
 
         LocalDate emp3 = LocalDate.of(2007,1,16);
         Employee employee3 = new Employee(emp3);
@@ -47,10 +49,11 @@ public class ManagementDataBase {
         employee3.setNationality("Khmer");
         employee3.setPosition("DevOps Engineering");
         employee3.setDepartment("Information Technology");
-        employee3.setAttendance(true);
+        employee3.setAttendance("P");
         employee3.setSalary(1200.00);
         employee3.setUserName("Employee3");
         employee3.setPassword("emp345");
+        employee3.setPerformancerating(70);
 
 
         LocalDate emp4 = LocalDate.of(2002,6,4);
@@ -61,10 +64,11 @@ public class ManagementDataBase {
         employee4.setNationality("Chinese");
         employee4.setPosition("HR Manager");
         employee4.setDepartment("Human resources");
-        employee4.setAttendance(true);
+        employee4.setAttendance("P");
         employee4.setSalary(1200.00);
         employee4.setUserName("Employee3");
         employee4.setPassword("emp345");
+        employee4.setPerformancerating(70);
 
 
         LocalDate emp5 = LocalDate.of(2002,6,4);
@@ -75,10 +79,11 @@ public class ManagementDataBase {
         employee5.setNationality("Khmer");
         employee5.setPosition("Recruitment Officer");
         employee5.setDepartment("Human resources");
-        employee5.setAttendance(true);
+        employee5.setAttendance("P");
         employee5.setSalary(1200.00);
         employee5.setUserName("Employee3");
         employee5.setPassword("emp345");
+        employee5.setPerformancerating(70);
 
         LocalDate emp6 = LocalDate.of(2002,6,4);
         Employee employee6 = new Employee(emp6);
@@ -88,10 +93,11 @@ public class ManagementDataBase {
         employee6.setNationality("Khmer");
         employee6.setPosition("Payroll Specialist");
         employee6.setDepartment("Human resources");
-        employee6.setAttendance(true);
+        employee6.setAttendance("P");
         employee6.setSalary(1200.00);
         employee6.setUserName("Employee3");
         employee6.setPassword("emp345");
+        employee6.setPerformancerating(70);
 
 
         LocalDate emp7 = LocalDate.of(2002,6,4);
@@ -102,10 +108,11 @@ public class ManagementDataBase {
         employee7.setNationality("Chinese");
         employee7.setPosition("accountant");
         employee7.setDepartment("Finance");
-        employee7.setAttendance(true);
+        employee7.setAttendance("P");
         employee7.setSalary(1200.00);
         employee7.setUserName("Employee3");
         employee7.setPassword("emp345");
+        employee7.setPerformancerating(70);
 
         LocalDate emp8 = LocalDate.of(2002,6,4);
         Employee employee8 = new Employee(emp8);
@@ -115,10 +122,11 @@ public class ManagementDataBase {
         employee8.setNationality("Chinese");
         employee8.setPosition("Finacial Analyst");
         employee8.setDepartment("Finance");
-        employee8.setAttendance(true);
+        employee8.setAttendance("P");
         employee8.setSalary(1200.00);
         employee8.setUserName("Employee3");
         employee8.setPassword("emp345");
+        employee8.setPerformancerating(70);
 
         LocalDate emp9 = LocalDate.of(2002,6,4);
         Employee employee9 = new Employee(emp9);
@@ -128,10 +136,11 @@ public class ManagementDataBase {
         employee9.setNationality("Chinese");
         employee9.setPosition("Payroll officer");
         employee9.setDepartment("Finance");
-        employee9.setAttendance(true);
+        employee9.setAttendance("P");
         employee9.setSalary(1200.00);
         employee9.setUserName("Employee3");
         employee9.setPassword("emp345");
+        employee9.setPerformancerating(70);
 
         LocalDate emp10 = LocalDate.of(2002,6,4);
         Employee employee10 = new Employee(emp10);
@@ -141,10 +150,11 @@ public class ManagementDataBase {
         employee10.setNationality("Chinese");
         employee10.setPosition("Sales Executive");
         employee10.setDepartment("Sale & Marketing");
-        employee10.setAttendance(true);
+        employee10.setAttendance("P");
         employee10.setSalary(1200.00);
         employee10.setUserName("Employee3");
         employee10.setPassword("emp345");
+        employee10.setPerformancerating(70);
 
         LocalDate emp11 = LocalDate.of(2002,6,4);
         Employee employee11 = new Employee(emp11);
@@ -154,10 +164,11 @@ public class ManagementDataBase {
         employee11.setNationality("Chinese");
         employee11.setPosition("Marketing Coordinator");
         employee11.setDepartment("Sale & Marketing");
-        employee11.setAttendance(true);
+        employee11.setAttendance("P");
         employee11.setSalary(1900.00);
         employee11.setUserName("Employee3");
         employee11.setPassword("emp345");
+        employee11.setPerformancerating(70);
 
         LocalDate emp12 = LocalDate.of(2002,6,4);
         Employee employee12 = new Employee(emp12);
@@ -167,10 +178,11 @@ public class ManagementDataBase {
         employee12.setNationality("Chinese");
         employee12.setPosition("Customer Relationship Manager");
         employee12.setDepartment("Sale & Marketing");
-        employee12.setAttendance(true);
+        employee12.setAttendance("P");
         employee12.setSalary(1500.00);
         employee12.setUserName("Employee3");
         employee12.setPassword("emp345");
+        employee12.setPerformancerating(70);
 
 
         LocalDate emp13 = LocalDate.of(2002,6,4);
@@ -181,10 +193,11 @@ public class ManagementDataBase {
         employee13.setNationality("Chinese");
         employee13.setPosition("Inventory Controller");
         employee13.setDepartment("Operation");
-        employee13.setAttendance(true);
+        employee13.setAttendance("P");
         employee13.setSalary(1500.00);
         employee13.setUserName("Employee3");
         employee13.setPassword("emp345");
+        employee13.setPerformancerating(70);
 
 
         LocalDate emp14 = LocalDate.of(2002,6,4);
@@ -195,10 +208,11 @@ public class ManagementDataBase {
         employee14.setNationality("Chinese");
         employee14.setPosition("Operations Manager");
         employee14.setDepartment("Operation");
-        employee14.setAttendance(true);
+        employee14.setAttendance("P");
         employee14.setSalary(1500.00);
         employee14.setUserName("Employee3");
         employee14.setPassword("emp345");
+        employee14.setPerformancerating(70);
 
         LocalDate adm1 = LocalDate.of(2000,10,3);
         Admin admin1 = new Admin(adm1);
@@ -208,10 +222,11 @@ public class ManagementDataBase {
         admin1.setNationality("Chinese");
         admin1.setPosition("Admin");
         admin1.setDepartment("Operation");
-        admin1.setAttendance(true);
+        admin1.setAttendance("P");
         admin1.setSalary(1700.00);
         admin1.setUserName("Admin");
         admin1.setPassword("AdminKhang");
+        admin1.setPerformancerating(90);
 
         ManagementList.add(admin1);
         ManagementList.add(employee1);
@@ -296,4 +311,6 @@ public class ManagementDataBase {
     public void setEmployee(List<Employee> employeeList){
         this.ManagementList = employeeList.reversed() ;
     }
+
+
 }

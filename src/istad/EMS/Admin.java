@@ -11,7 +11,7 @@ public class Admin extends Employee{
         super(birthday);
     }
 
-    public Admin(String name, LocalDate birthday, String nationality, String gender, String department, String position, Double salary, Boolean attendance) {
+    public Admin(String name, LocalDate birthday, String nationality, String gender, String department, String position, Double salary, String attendance) {
         super(name, birthday, nationality, gender, department, position, salary, attendance);
     }
 
@@ -91,12 +91,12 @@ public class Admin extends Employee{
     }
 
     @Override
-    public Boolean getAttendance() {
+    public String getAttendance() {
         return super.getAttendance();
     }
 
     @Override
-    public void setAttendance(Boolean attendance) {
+    public void setAttendance(String attendance) {
         super.setAttendance(attendance);
     }
 

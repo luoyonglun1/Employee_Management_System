@@ -156,7 +156,7 @@ public class DisplayUtil {
     }
 
     public static void table(List<Employee> employees) {
-        Table table = new Table(8, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        Table table = new Table(9, BorderStyle.UNICODE_ROUND_BOX_WIDE);
         table.addCell("ID");
         table.addCell("NAME");
         table.addCell("GENDER");
@@ -164,7 +164,8 @@ public class DisplayUtil {
         table.addCell("NATIONALITY");
         table.addCell("DEPARTMENT");
         table.addCell("POSITION");
-        table.addCell("SALARY");
+        table.addCell("SALARY ($)");
+        table.addCell("RATING (%)      ");
         for (Employee employee : employees) {
             table.addCell(employee.getId().toString());
             table.addCell(employee.getName());
@@ -174,6 +175,16 @@ public class DisplayUtil {
             table.addCell(employee.getDepartment());
             table.addCell(employee.getPosition());
             table.addCell(employee.getSalary().toString());
+            String rating ;
+            if (employee.getPerformancerating() != null) {
+                rating = employee.getPerformancerating().toString();
+            } else {
+                rating = "not rating yet";
+            }
+
+            table.addCell(rating);
+
+
         }
         DisplayUtil.printNewLine(table.render());
     }
@@ -205,8 +216,45 @@ public class DisplayUtil {
             table.addCell(employee.getPosition());
             table.addCell(employee.getSalary().toString());
 
+
         DisplayUtil.printNewLine(table.render());
     }
+
+    public static void tableForAttendance(List<Employee> employees) {
+        Table table = new Table(3, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        table.addCell("ID");
+        table.addCell("NAME");
+        table.addCell("TODAY");
+
+
+        for (Employee employee : employees) {
+            table.addCell(employee.getId().toString());
+            table.addCell(employee.getName());
+            table.addCell(employee.getAttendance());
+            }
+
+
+        DisplayUtil.printNewLine(table.render());
+    }
+
+
+    public static void tableForAttendanceEmployee() {
+        Table table = new Table(4, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        table.addCell("1. P : Present");
+        table.addCell("2. PL : Permission Leave");
+        table.addCell("3. SL : Sick Leave");
+        table.addCell("4. H : Half Day");
+        DisplayUtil.printNewLine(table.render());
+    }
+
+    public static void tableForAttendanceAdmin() {
+        Table table = new Table(2, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        table.addCell("1. PM : Permission");
+        table.addCell("2. A : Absent");
+        DisplayUtil.printNewLine(table.render());
+    }
+
+
 
     public static void tableForList(List<Employee> employees) {
         Table table = new Table(8, BorderStyle.UNICODE_ROUND_BOX_WIDE);

@@ -26,6 +26,8 @@ public interface EmployeeService {
     void updateEmployeeByID(Integer id, Employee newEmployee);
     List<Employee> FilteringDepartment(String department);
     List<Employee> FilteringPosition(String position);
+    Employee ratingEmployee(Integer id , Integer percentage);
+    List<Employee> findEmployeeBySalary(Double salary, Boolean order);
 
 
 

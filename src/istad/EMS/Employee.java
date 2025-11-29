@@ -13,9 +13,11 @@ public class Employee {
     private String department ;
     private String position ;
     private Double salary ;
-    private Boolean attendance ;
+    private String attendance ;
     private String userName ;
     private String password ;
+    private Integer performancerating ;
+
 
 
     public Employee() {
@@ -32,7 +34,7 @@ public class Employee {
 //        this.password = password;
 //    }
 
-    public Employee(String name, LocalDate birthday, String nationality, String gender, String department, String position, Double salary, Boolean attendance) {
+    public Employee(String name, LocalDate birthday, String nationality, String gender, String department, String position, Double salary, String attendance) {
 
         this.name = name;
         this.birthday = birthday;
@@ -43,7 +45,7 @@ public class Employee {
         this.salary = salary;
         this.attendance = attendance;
     }
-    public Employee(String name,  String nationality, String gender, String department, String position, Double salary, Boolean attendance , String userName , String password ) {
+    public Employee(String name,  String nationality, String gender, String department, String position, Double salary, String attendance , String userName , String password ) {
 
         this.name = name;
         this.nationality = nationality;
@@ -54,6 +56,14 @@ public class Employee {
         this.attendance = attendance;
         this.userName = userName ;
         this.password = password ;
+    }
+
+    public Integer getPerformancerating() {
+        return performancerating;
+    }
+
+    public void setPerformancerating(Integer performancerating) {
+        this.performancerating = performancerating;
     }
 
     public Integer getId() {
@@ -122,11 +132,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Boolean getAttendance() {
+    public String getAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Boolean attendance) {
+    public void setAttendance(String attendance) {
         this.attendance = attendance;
     }
 

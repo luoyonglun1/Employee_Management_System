@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(Integer id) {
         // TODO
-        List<Employee> employees = employeeDataBase.getEmployeesDesc()
+        List<Employee> employees = employeeDataBase.getAllEmployeesDesc()
                 .stream()
                 .filter(employee -> !employee.getId().equals(id))
                 .collect(Collectors.toList());
@@ -117,7 +117,7 @@ public void updateEmployeeByID(Integer id, Employee newEmployee) {
                     employee.setDepartment(newEmployee.getDepartment());
                     employee.setPosition(newEmployee.getPosition());
                     employee.setSalary(newEmployee.getSalary());
-                    employee.setAttendance(true);
+                    employee.setAttendance("Not yet take attendance");
                     employee.setUserName(newEmployee.getUserName());
                     employee.setPassword(newEmployee.getPassword());
                 }
@@ -128,4 +128,36 @@ public void updateEmployeeByID(Integer id, Employee newEmployee) {
     // Save updated list back to database
     employeeDataBase.setEmployee(updatedEmployees);
 }
+
+    public Employee ratingEmployee(Integer id, Integer percentage) {
+        Optional<Employee> foundEmployee = employeeDataBase
+                .getEmployeesDesc()
+                .stream()
+                .filter(employee -> employee.getId().equals(id))
+                .findFirst();
+
+        if (foundEmployee.isPresent()) {
+            Employee employee = foundEmployee.get();
+            employee.setPerformancerating(percentage);
+            return employee;
+        }else{
+            return null;
+        }
+
+    }
+
+    @Override
+    public List<Employee> findEmployeeBySalary(Double salary, Boolean order) {
+        return employeeDataBase
+                .getAllEmployeesDesc()
+                .stream()
+                .filter(Employee -> {
+                    if (order) { // Bigger or Equal
+                        return Employee.getSalary() >= salary;
+                    } else { // Smaller or Equal
+                        return Employee.getSalary() <= salary;
+                    }
+                })
+                .toList();
+    }
 }
