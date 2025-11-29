@@ -47,62 +47,167 @@ public class EmployeeApplication {
                                                    |     Search By ID      |
                                                    |-----------------------|
                                                    """);
-                                           Integer id = InputUtil.getInteger("Enter ID to search the Employee : ");
-                                           Employee employee = employeeService.SearchEmployeeByID(id) ;
-                                           DisplayUtil.tableForNonCount(employee);
+                                           List<Employee> employees = employeeService.ViewAllEmployee();
+                                           Integer id;
+                                           boolean valid = false;
+
+                                           while (!valid) {
+                                               id = InputUtil.getInteger("Enter Employee ID : ") ;
+                                               final Integer finalId = id;
+                                               valid = employees.stream().anyMatch(emp -> emp.getId().equals(finalId));
+                                               if (!valid) {
+                                                   System.out.println("Employee with ID " + id + " not found!!");
+                                               } else {
+                                                   Employee employee = employeeService.SearchEmployeeByID(id) ;
+                                                   DisplayUtil.tableForNonCount(employee);
+                                               }
+                                           }
                                        }
                                        case 2 -> {
-                                           String name = InputUtil.getText("Enter the Employee name : ");
-                                           List<Employee> foundEmployees = employeeService.SearchEmployeeByName(name);
-                                           DisplayUtil.tableForList(foundEmployees);
+                                           List<Employee> employees = employeeService.ViewAllEmployee();
+                                           String name ;
+                                           boolean valid = false;
+
+                                           while (!valid) {
+                                               name = InputUtil.getTextOnly("Enter the Employee name : ");
+                                               final String finalName = name;
+
+//                                               valid = employees.stream().anyMatch(emp -> emp.getName().equals(employeeService.SearchEmployeeByName(finalName)));
+                                               List<Employee> foundEmployees1 = employeeService.SearchEmployeeByName(finalName);
+                                               valid = !foundEmployees1.isEmpty();
+
+                                               if (!valid) {
+                                                   System.out.println("Employee name " + name + " not found!!");
+                                               } else {
+                                                   List<Employee> foundEmployees = employeeService.SearchEmployeeByName(finalName);
+                                                   DisplayUtil.tableForList(foundEmployees);
+                                               }
+                                           }
                                        }
                                    }
                                }
                                // not yet
                                case 3 -> {
-                                   DisplayUtil.printNewLine("""
-                                                   |---------------------------------------|
-                                                   |      Rating Employee Performance      |               
-                                                   |---------------------------------------|
-                                                   """);
-                                   Integer id = InputUtil.getInteger("Enter Employee ID : ") ;
-                                   DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
-                                   Integer percentage = InputUtil.getInteger("Enter their performance 0 -> 100% : ");
-                                   employeeService.ratingEmployee(id , percentage);
+                                  DisplayUtil.printNewLine(DisplayUtil.Ratingmenu);
+                                   Integer opt = InputUtil.getInteger("Enter your option : ");
+                                   switch (opt){
+                                       case 1 -> {
+                                           DisplayUtil.table(employeeService.FilteringNotYetRating());
+                                           List<Employee> employees = employeeService.FilteringNotYetRating();
+
+                                           Integer id;
+                                           boolean valid = false;
+
+                                           while (!valid) {
+                                               id = InputUtil.getInteger("Enter Employee ID : ") ;
+                                               final Integer finalId = id;
+                                               valid = employees.stream().anyMatch(emp -> emp.getId().equals(finalId));
+                                               if (!valid) {
+                                                   System.out.println(" Invalid ID. Please enter an ID from the list above.");
+                                               } else {
+                                                   DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
+                                                   Integer percentage = InputUtil.getInteger("Enter their performance 0 -> 100% : ");
+                                                   employeeService.ratingEmployee(id , percentage);
+                                               }
+                                           }
+
+                                       }
+                                       case 2 -> {
+                                           DisplayUtil.table(employeeService.FilteringRatedEmployee());
+                                           List<Employee> employees = employeeService.FilteringRatedEmployee();
+
+                                           Integer id;
+                                           boolean valid = false;
+
+                                           while (!valid) {
+                                               id = InputUtil.getInteger("Enter Employee ID : ") ;
+                                               final Integer finalId = id;
+                                               valid = employees.stream().anyMatch(emp -> emp.getId().equals(finalId));
+                                               if (!valid) {
+                                                   System.out.println(" Invalid ID. Please enter an ID from the list above.");
+                                               } else {
+                                                   DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
+                                                   Integer percentage = InputUtil.getInteger("Enter their performance 0 -> 100% : ");
+                                                   employeeService.ratingEmployee(id , percentage);
+                                               }
+                                           }
+                                       }
+                                   }
+
                                }
                                // done
                                case 4 -> {
-                                   String name = InputUtil.getText("Enter your name : ");
+                                   String name = InputUtil.getTextOnly("Enter your name : ");
                                    DisplayUtil.printNewLine("Enter your Birth Date! ");
-                                   Integer year = InputUtil.getInteger("Enter your birth year : ");
-                                   Integer month = InputUtil.getInteger("Enter your birth month : ");
-                                   Integer day = InputUtil.getInteger("Enter your birth day : ");
-                                   LocalDate age = LocalDate.of(year , month , day);
-                                   String nationality = InputUtil.getText("Enter your nationality : ");
-//                                   DisplayUtil.printNewLine(DisplayUtil.GenderOpt);
+
+                                   int year;
+                                   do {
+                                       year = InputUtil.getInteger("Enter your birth year : ");
+                                       if (year >= 2025) {
+                                           System.out.println("Year must be less than 2025.");
+                                       }
+                                   } while (year >= 2025);
+
+                                   int month;
+                                   do {
+                                       month = InputUtil.getInteger("Enter your birth month : ");
+                                       if (month > 12 || month < 1) {
+                                           System.out.println("Month must be between 1 and 12.");
+                                       }
+                                   } while (month > 12 || month < 1);
+
+                                   int day;
+                                   do {
+                                       day = InputUtil.getInteger("Enter your birth day : ");
+                                       if (day > 31 || day < 1) {
+                                           System.out.println("Day must be between 1 and 31.");
+                                       }
+                                   } while (day > 31 || day < 1);
+
+                                   LocalDate age = LocalDate.of(year, month, day);
+
+                                   String nationality = InputUtil.getTextOnly("Enter your nationality : ");
+
+                                   String gender = null;
+                                   int gd;
                                    DisplayUtil.tableOneRow("1. Male", "2. Female");
-                                   Integer gd = InputUtil.getInteger("Enter your Gender : ");
-                                   String gender ;
-                                   switch (gd){
-                                       case 1 -> {
-                                           gender = "Male" ;
+                                   do {
+                                       gd = InputUtil.getInteger("Enter your Gender : ");
+
+                                       switch (gd) {
+                                           case 1 -> gender = "Male";
+                                           case 2 -> gender = "Female";
+                                           default -> System.out.println("Invalid input. Please enter 1 for Male or 2 for Female.");
                                        }
-                                       case 2 -> {
-                                           gender = "Female" ;
-                                       }
-                                       default -> throw new IllegalStateException();
-                                   }
+                                   } while (gender == null);
+
+                                   int optDp;
+                                   String department = null;
+                                   String position = null;
+
+
                                    DisplayUtil.DepartmentList();
-                                   Integer optDp = InputUtil.getInteger("Enter your departmnt : ");
-                                   String department ;
-                                   String position ;
-                                   System.out.println(optDp);
-                                   switch (optDp){
+                                   do {
+                                       optDp = InputUtil.getInteger("Enter your department : ");
+
+                                       if (optDp < 1 || optDp > 5) {
+                                           System.out.println("Invalid option. Please enter a number between 1 and 5.");
+                                       }
+                                   } while (optDp < 1 || optDp > 5);
+
+                                   switch (optDp) {
                                        case 1 -> {
                                            department = "Human Resources";
                                            DisplayUtil.PositionOfHR();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "HR Manager";
                                                }
@@ -110,17 +215,22 @@ public class EmployeeApplication {
                                                    position = "Recruitment Officer";
                                                }
                                                case 3 -> {
-                                                   position = "Payroll Specialist";
+                                                   position = "Payroll Specialist";;
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 2 -> {
                                            department = "Infomation Technology";
                                            DisplayUtil.PositionOfIT();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Software Developer";
                                                }
@@ -130,15 +240,20 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "DevOps engineering";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 3 -> {
                                            department = "Finance";
                                            DisplayUtil.PositionOfFinance();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Accountant";
                                                }
@@ -148,15 +263,20 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Payroll officer";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 4 -> {
                                            department = "Sale & Marketing";
                                            DisplayUtil.PositionOfSaleAndMarketing();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Sales Executive";
                                                }
@@ -166,15 +286,22 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Customer Relationship Manager";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 5 -> {
                                            department = "Operation";
                                            DisplayUtil.PositionOfOperation();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+
+
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Operations Manager";
                                                }
@@ -184,13 +311,11 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Admin";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
-                                       default -> throw new IllegalStateException();
-
                                    }
+
+
                                    Double salary = InputUtil.getDouble("Enter the Employee salary : ");
                                    String userName = InputUtil.getText("Enter the Employee Login userName : ");
                                    String pw = InputUtil.getText("Enter the Emplopyee password : ");
@@ -211,37 +336,50 @@ public class EmployeeApplication {
                                                    """);
                                    Integer id = InputUtil.getInteger("Please Enter Employee ID to update information :");
                                    DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
-                                   String name = InputUtil.getText("Enter your name : ");
-//                                   DisplayUtil.printNewLine("Enter your Birth Date! ");
-//                                   Integer year = InputUtil.getInteger("Enter your birth year : ");
-//                                   Integer month = InputUtil.getInteger("Enter your birth month : ");
-//                                   Integer day = InputUtil.getInteger("Enter your birth day : ");
-//                                   LocalDate age = LocalDate.of(year , month , day);
-                                   String nationality = InputUtil.getText("Enter your nationality : ");
-//                                   DisplayUtil.printNewLine(DisplayUtil.GenderOpt);
+                                   String name = InputUtil.getTextOnly("Enter your name : ");
+                                   String nationality = InputUtil.getTextOnly("Enter your nationality : ");
+
+                                   String gender = null;
+                                   int gd;
                                    DisplayUtil.tableOneRow("1. Male", "2. Female");
-                                   Integer gd = InputUtil.getInteger("Enter your Gender : ");
-                                   String gender ;
-                                   switch (gd){
-                                       case 1 -> {
-                                           gender = "Male" ;
+                                   do {
+                                       gd = InputUtil.getInteger("Enter your Gender : ");
+
+                                       switch (gd) {
+                                           case 1 -> gender = "Male";
+                                           case 2 -> gender = "Female";
+                                           default -> System.out.println("Invalid input. Please enter 1 for Male or 2 for Female.");
                                        }
-                                       case 2 -> {
-                                           gender = "Female" ;
-                                       }
-                                       default -> throw new IllegalStateException();
-                                   }
+                                   } while (gender == null);
+
+
+                                   int optDp;
+                                   String department = null;
+                                   String position = null;
+
+
                                    DisplayUtil.DepartmentList();
-                                   Integer optDp = InputUtil.getInteger("Enter your departmnt : ");
-                                   String department ;
-                                   String position ;
-                                   System.out.println(optDp);
-                                   switch (optDp){
+                                   do {
+                                       optDp = InputUtil.getInteger("Enter your department : ");
+
+                                       if (optDp < 1 || optDp > 5) {
+                                           System.out.println("Invalid option. Please enter a number between 1 and 5.");
+                                       }
+                                   } while (optDp < 1 || optDp > 5);
+
+                                   switch (optDp) {
                                        case 1 -> {
                                            department = "Human Resources";
                                            DisplayUtil.PositionOfHR();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "HR Manager";
                                                }
@@ -249,17 +387,22 @@ public class EmployeeApplication {
                                                    position = "Recruitment Officer";
                                                }
                                                case 3 -> {
-                                                   position = "Payroll Specialist";
+                                                   position = "Payroll Specialist";;
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 2 -> {
                                            department = "Infomation Technology";
                                            DisplayUtil.PositionOfIT();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Software Developer";
                                                }
@@ -269,15 +412,20 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "DevOps engineering";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 3 -> {
                                            department = "Finance";
                                            DisplayUtil.PositionOfFinance();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Accountant";
                                                }
@@ -287,15 +435,20 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Payroll officer";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 4 -> {
                                            department = "Sale & Marketing";
                                            DisplayUtil.PositionOfSaleAndMarketing();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Sales Executive";
                                                }
@@ -305,15 +458,22 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Customer Relationship Manager";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
                                        case 5 -> {
                                            department = "Operation";
                                            DisplayUtil.PositionOfOperation();
-                                           Integer optPst = InputUtil.getInteger("Enter your position : ");
-                                           switch (optPst){
+
+
+                                           Integer optPst;
+                                           do {
+                                               optPst = InputUtil.getInteger("Enter your position : ");
+                                               if (optPst < 1 || optPst > 3) {
+                                                   System.out.println("Invalid position. Please enter 1, 2, or 3.");
+                                               }
+                                           } while (optPst < 1 || optPst > 3);
+
+                                           switch (optPst) {
                                                case 1 -> {
                                                    position = "Operations Manager";
                                                }
@@ -323,13 +483,15 @@ public class EmployeeApplication {
                                                case 3 -> {
                                                    position = "Admin";
                                                }
-                                               default -> throw new IllegalStateException();
                                            }
-
                                        }
-                                       default -> throw new IllegalStateException();
-
                                    }
+
+
+
+
+
+//
                                    Double salary = InputUtil.getDouble("Enter the Employee salary : ");
                                    String userName = InputUtil.getText("Enter the Employee Login userName : ");
                                    String pw = InputUtil.getText("Enter the Emplopyee password : ");

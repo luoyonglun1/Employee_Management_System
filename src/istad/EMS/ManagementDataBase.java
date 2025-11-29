@@ -21,9 +21,9 @@ public class ManagementDataBase {
         employee1.setDepartment("Information Technology");
         employee1.setAttendance("P");
         employee1.setSalary(1500.00);
-        employee1.setUserName("Employee");
+        employee1.setUserName("emp1");
         employee1.setPassword("emp123");
-        employee1.setPerformancerating(70);
+        employee1.setPerformancerating(null);
 
 
         LocalDate emp2 = LocalDate.of(2004,5,20);
@@ -37,7 +37,7 @@ public class ManagementDataBase {
         employee2.setDepartment("Information Technology");
         employee2.setAttendance("P");
         employee2.setSalary(1700.00);
-        employee2.setUserName("Employee2");
+        employee2.setUserName("emp2");
         employee2.setPassword("emp234");
         employee2.setPerformancerating(70);
 
@@ -51,9 +51,9 @@ public class ManagementDataBase {
         employee3.setDepartment("Information Technology");
         employee3.setAttendance("P");
         employee3.setSalary(1200.00);
-        employee3.setUserName("Employee3");
+        employee3.setUserName("emp3");
         employee3.setPassword("emp345");
-        employee3.setPerformancerating(70);
+        employee3.setPerformancerating(null);
 
 
         LocalDate emp4 = LocalDate.of(2002,6,4);
@@ -66,8 +66,8 @@ public class ManagementDataBase {
         employee4.setDepartment("Human resources");
         employee4.setAttendance("P");
         employee4.setSalary(1200.00);
-        employee4.setUserName("Employee3");
-        employee4.setPassword("emp345");
+        employee4.setUserName("emp4");
+        employee4.setPassword("emp456");
         employee4.setPerformancerating(70);
 
 
@@ -81,8 +81,8 @@ public class ManagementDataBase {
         employee5.setDepartment("Human resources");
         employee5.setAttendance("P");
         employee5.setSalary(1200.00);
-        employee5.setUserName("Employee3");
-        employee5.setPassword("emp345");
+        employee5.setUserName("emp5");
+        employee5.setPassword("emp567");
         employee5.setPerformancerating(70);
 
         LocalDate emp6 = LocalDate.of(2002,6,4);
@@ -95,9 +95,9 @@ public class ManagementDataBase {
         employee6.setDepartment("Human resources");
         employee6.setAttendance("P");
         employee6.setSalary(1200.00);
-        employee6.setUserName("Employee3");
-        employee6.setPassword("emp345");
-        employee6.setPerformancerating(70);
+        employee6.setUserName("emp6");
+        employee6.setPassword("emp678");
+        employee6.setPerformancerating(null);
 
 
         LocalDate emp7 = LocalDate.of(2002,6,4);
@@ -110,8 +110,8 @@ public class ManagementDataBase {
         employee7.setDepartment("Finance");
         employee7.setAttendance("P");
         employee7.setSalary(1200.00);
-        employee7.setUserName("Employee3");
-        employee7.setPassword("emp345");
+        employee7.setUserName("emp7");
+        employee7.setPassword("emp789");
         employee7.setPerformancerating(70);
 
         LocalDate emp8 = LocalDate.of(2002,6,4);

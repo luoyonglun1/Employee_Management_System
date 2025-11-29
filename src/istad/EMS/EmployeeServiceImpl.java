@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee SearchEmployeeByID(Integer id) {
         Optional<Employee> foundEmployee = employeeDataBase
-                .getEmployeesDesc()
+                .getAllEmployeesDesc()
                 .stream()
                 .filter(employee -> {
                     return employee.getId().equals(id);
@@ -93,6 +93,34 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .toList();
     }
 
+//    public List<Employee> FilteringNotYetRating(String rating) {
+//
+//        return employeeDataBase
+//                .getAllEmployeesDesc()
+//                .stream()
+//                .filter(
+//
+//                        employee -> employee.getPerformancerating().toString()
+//                        .contains(rating.toLowerCase()))
+//                .toList();
+//    }
+public List<Employee> FilteringNotYetRating() {
+    return employeeDataBase
+            .getAllEmployeesDesc()
+            .stream()
+            .filter(employee -> employee.getPerformancerating() == null)
+            .toList();
+}
+
+    @Override
+    public List<Employee> FilteringRatedEmployee() {
+        return employeeDataBase
+                .getAllEmployeesDesc()
+                .stream()
+                .filter(employee -> employee.getPerformancerating() != null)
+                .toList();
+    }
+
     @Override
     public Employee employeeLogin(String userName, String password) {
         return employeeDataBase.employeeLogin(userName ,  password);
@@ -100,9 +128,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 public void updateEmployeeByID(Integer id, Employee newEmployee) {
-    Integer year = InputUtil.getInteger("Enter your birth year : ");
-    Integer month = InputUtil.getInteger("Enter your birth month : ");
-    Integer day = InputUtil.getInteger("Enter your birth day : ");
+    DisplayUtil.printNewLine("Enter your Birth Date! ");
+
+    int year;
+    do {
+        year = InputUtil.getInteger("Enter your birth year : ");
+        if (year >= 2025) {
+            System.out.println("Year must be less than 2025.");
+        }
+    } while (year >= 2025);
+
+    int month;
+    do {
+        month = InputUtil.getInteger("Enter your birth month : ");
+        if (month > 12 || month < 1) {
+            System.out.println("Month must be between 1 and 12.");
+        }
+    } while (month > 12 || month < 1);
+
+    int day;
+    do {
+        day = InputUtil.getInteger("Enter your birth day : ");
+        if (day > 31 || day < 1) {
+            System.out.println("Day must be between 1 and 31.");
+        }
+    } while (day > 31 || day < 1);
     LocalDate dateOfBirth = LocalDate.of(year, month, day);
 
     // Update employee list using map (not peek)
@@ -138,8 +188,16 @@ public void updateEmployeeByID(Integer id, Employee newEmployee) {
 
         if (foundEmployee.isPresent()) {
             Employee employee = foundEmployee.get();
-            employee.setPerformancerating(percentage);
-            return employee;
+            while (true) {
+                if (percentage <= 100) {
+                    employee.setPerformancerating(percentage);
+                    return employee;
+                } else {
+                    System.out.println("The rating must be from 0 -> 100%");
+                    percentage = InputUtil.getInteger("Enter rating again (0 -> 100%) : ");
+                }
+        }
+
         }else{
             return null;
         }

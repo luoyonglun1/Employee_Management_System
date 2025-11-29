@@ -10,6 +10,19 @@ public class InputUtil {
         return scanner.nextLine();
     }
 
+    public static String getTextOnly(String label) {
+        String input;
+        while (true) {
+            System.out.print(label);
+            input = scanner.nextLine().trim();
+            if (!input.matches("\\d+")) {
+                return input;
+            }
+            System.out.println("Invalid input. Please enter text only, not numbers.");
+        }
+    }
+
+
     public static Integer getInteger(String label) {
         do {
             try {

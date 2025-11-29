@@ -49,6 +49,13 @@ public class DisplayUtil {
             3. Take attendance
             0. Back to the Login
             """;
+    public final static String Ratingmenu = """
+            |---------------------------------------------|
+            |     [+] RATING EMPLOYEE PERFORMANCE [+]     |   
+            |---------------------------------------------|
+            1.  Rate Employee not yet get rating
+            2. Change Employee rating
+            """;
 
     public final static String GenderOpt = """
             --------------------------------
