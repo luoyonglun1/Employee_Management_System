@@ -35,9 +35,6 @@ public class DisplayUtil {
             |--------------------------------------------|
             |        [+] Enter Search Option [+]         |
             |--------------------------------------------|
-            1. Search by ID 
-            2. Search by Name 
-            3. Search by gender
             """;
 
     public final static String EmployeeMenu = """
@@ -47,14 +44,13 @@ public class DisplayUtil {
             1. View attendance 
             2. View performance rating
             3. Take attendance
+            4. View personal information
             0. Back to the Login
             """;
     public final static String Ratingmenu = """
             |---------------------------------------------|
             |     [+] RATING EMPLOYEE PERFORMANCE [+]     |   
             |---------------------------------------------|
-            1.  Rate Employee not yet get rating
-            2. Change Employee rating
             """;
 
     public final static String GenderOpt = """
