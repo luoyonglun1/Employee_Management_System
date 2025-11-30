@@ -28,7 +28,7 @@ public class DisplayUtil {
             8. Position filtering Employee
             9. Salary filtering 
             10. View Employee attendance  
-            11. Set Permission Or Absent 
+            11. Set attendance for Employee
             12. Get request from Employee
             0. Back to the Login
             """;
@@ -210,6 +210,12 @@ public class DisplayUtil {
                 table.addCell(employee.getDepartment());
                 table.addCell(employee.getPosition());
                 table.addCell(employee.getRequestToAdmin());
+
+
+            }
+            else{
+                System.out.println("There are no Employee request message.");
+                return ;
             }
         }
 
