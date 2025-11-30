@@ -32,7 +32,7 @@ public class EmployeeApplication {
                            switch (adminOpt){
                                // done
                                case 1 -> {
-                                   DisplayUtil.printNewLine("---------------------------------------------------- EMPLOYEE LIST ----------------------------------------------------");
+                                   DisplayUtil.printNewLine("------------------------------------------------------------ EMPLOYEE LIST -------------------------------------------------------------------");
                                    DisplayUtil.table(employeeService.ViewAllEmployee());
                                }
                                // not yet done
@@ -105,7 +105,7 @@ public class EmployeeApplication {
                                // not yet
                                case 3 -> {
                                   DisplayUtil.printNewLine(DisplayUtil.Ratingmenu);
-                                  DisplayUtil.tableOneRow("1. Rate Employee not yet get rating" , "2. Change Employee rating");
+                                  DisplayUtil.tableOneRow("1. Rate Employee not get rating yet" , "2. Change Employee rating");
                                   Boolean isTrue = true ;
                                   Integer opt ;
                                   do {
@@ -375,7 +375,7 @@ public class EmployeeApplication {
                                        final Integer finalId = id;
                                        valid = employees.stream().anyMatch(emp -> emp.getId().equals(finalId));
                                        if (!valid) {
-                                           System.out.println(" Invalid ID. Please enter an ID from the list above.");
+                                           System.out.println(" Invalid ID. Please enter ID again.");
                                        } else {
                                            DisplayUtil.tableForNonCount(employeeService.SearchEmployeeByID(id));
                                            String name = InputUtil.getTextOnly("Enter your name : ");
@@ -570,7 +570,7 @@ public class EmployeeApplication {
                                        final Integer finalId = id;
                                        valid = employees.stream().anyMatch(emp -> emp.getId().equals(finalId));
                                        if (!valid) {
-                                           System.out.println(" Invalid ID. Please enter an ID from the list above.");
+                                           System.out.println(" Invalid ID. Please enter ID again.");
                                        } else {
                                            employeeService.deleteEmployee(id);
                                            DisplayUtil.showSuccessMsg("Employee deleted");
@@ -768,11 +768,6 @@ public class EmployeeApplication {
                                                    """);
 
 
-
-
-
-
-
                                    List<Employee> employees = employeeService.ViewAllEmployee();
                                    Integer id;
                                    boolean valid = false;
@@ -785,27 +780,71 @@ public class EmployeeApplication {
                                            System.out.println("Employee with ID " + id + " not found!!");
                                        } else {
 
+
+                                           Boolean isTrue = true ;
+                                           Integer opt ;
                                            Employee employee =  employeeService.SearchEmployeeByID(id);
                                            DisplayUtil.tableForNonCount(employee);
                                            DisplayUtil.tableForAttendanceAdmin();
-                                           Integer opt = InputUtil.getInteger("Enter your option : ");
-                                           switch (opt){
-                                               case 1 -> {
+                                           do {
+                                               opt = InputUtil.getInteger("Enter your option : ");
+                                               if (opt == 1 ){
                                                    employee.setAttendance("PM");
-                                               }
-                                               case 2 -> {
+                                                   isTrue = false ;
+                                               } else if (opt == 2) {
                                                    employee.setAttendance("A");
+                                                   isTrue = false;
+                                               } else if (opt == 3) {
+                                                   employee.setAttendance("P");
+                                                   isTrue = false;
+                                               } else if (opt == 4) {
+                                                   employee.setAttendance("PL");
+                                                   isTrue = false;
+                                               } else if (opt == 5) {
+                                                   employee.setAttendance("SL");
+                                                   isTrue = false;
+                                               } else if (opt == 6    ) {
+                                                   employee.setAttendance("H");
+                                                   isTrue = false;
                                                }
-                                           }
+                                               else {
+                                                   DisplayUtil.printNewLine("Invalid Option!! Please choose option between 1 and 6");
+                                               }
+                                           }while (isTrue);
+
+
+
+
+//                                           switch (opt){
+//                                               case 1 -> {
+//                                                   employee.setAttendance("PM");
+//                                               }
+//                                               case 2 -> {
+//                                                   employee.setAttendance("A");
+//                                               }
+//                                               case 3 -> {
+//                                                   employee.setAttendance("P");
+//                                               }
+//                                               case 4 -> {
+//                                                   employee.setAttendance("PL");
+//                                               }
+//                                               case 5 -> {
+//                                                   employee.setAttendance("SL");
+//                                               }
+//                                               case 6 -> {
+//                                                   employee.setAttendance("H");
+//                                               }
+//                                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 1 -> 6 ");
+//                                           }
                                        }
                                        }
                                    }
                                case 0 -> backToMain = false;
-                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 1 -> 11 ");
+                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 11 ");
                            }
                        }while(backToMain);
                    }else {
-                       System.out.println("Invalid admin credentials.");
+                       System.out.println("Username or Password is incorrect");
                    }
 
                 }
@@ -886,25 +925,17 @@ public class EmployeeApplication {
                                }
 
                                case 0 -> backToMain = false;
-                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 1 -> 4 ");
+                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 4 ");
                            }
                        }while(backToMain);
                    }else {
-                       System.out.println("Invalid employee credentials.");
+                       System.out.println("Username or Password is incorrect");
                    }
-
-
                 }
                 case 0 -> System.exit(0);
-                default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 1 -> 3 ");
+                default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 2 ");
             }
         }while(true);
-
-
-
-
-
-
     }
   
 }

@@ -251,9 +251,13 @@ public class DisplayUtil {
     }
 
     public static void tableForAttendanceAdmin() {
-        Table table = new Table(2, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        Table table = new Table(6, BorderStyle.UNICODE_ROUND_BOX_WIDE);
         table.addCell("1. PM : Permission");
         table.addCell("2. A : Absent");
+        table.addCell("3. P : Present");
+        table.addCell("4. PL : Permission Leave");
+        table.addCell("5. SL : Sick Leave");
+        table.addCell("6. H : Half Day");
         DisplayUtil.printNewLine(table.render());
     }
 
