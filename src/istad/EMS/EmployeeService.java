@@ -30,6 +30,8 @@ public interface EmployeeService {
     List<Employee> findEmployeeBySalary(Double salary, Boolean order);
     List<Employee> FilteringNotYetRating();
     List<Employee> FilteringRatedEmployee();
+    void sendRequestToAdmin(Employee employee , String request);
+
 
 
 

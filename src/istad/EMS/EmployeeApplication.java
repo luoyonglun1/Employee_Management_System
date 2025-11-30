@@ -812,35 +812,20 @@ public class EmployeeApplication {
                                                }
                                            }while (isTrue);
 
-
-
-
-//                                           switch (opt){
-//                                               case 1 -> {
-//                                                   employee.setAttendance("PM");
-//                                               }
-//                                               case 2 -> {
-//                                                   employee.setAttendance("A");
-//                                               }
-//                                               case 3 -> {
-//                                                   employee.setAttendance("P");
-//                                               }
-//                                               case 4 -> {
-//                                                   employee.setAttendance("PL");
-//                                               }
-//                                               case 5 -> {
-//                                                   employee.setAttendance("SL");
-//                                               }
-//                                               case 6 -> {
-//                                                   employee.setAttendance("H");
-//                                               }
-//                                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 1 -> 6 ");
-//                                           }
                                        }
                                        }
                                    }
+                               case 12 -> {
+                                   DisplayUtil.printNewLine("""
+                                                   |------------------------------|
+                                                   |     EMPLOYEES REQUSTION      |    
+                                                   |------------------------------|
+                                                   """);
+                                   List<Employee> employees = employeeService.ViewAllEmployee();
+                                   DisplayUtil.tableForGetRequest(employees);
+                               }
                                case 0 -> backToMain = false;
-                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 11 ");
+                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 12 ");
                            }
                        }while(backToMain);
                    }else {
@@ -895,10 +880,10 @@ public class EmployeeApplication {
                                    do {
                                        opt = InputUtil.getInteger("Enter your option : ");
 
-                                       if (opt < 1 || opt > 4) {
+                                       if (opt < 1 || opt > 5) {
                                            System.out.println("Invalid option. Please enter a number between 1 and 2.");
                                        }
-                                   } while (opt < 1 || opt > 4);
+                                   } while (opt < 1 || opt > 5);
 
                                    switch (opt){
                                        case 1 -> {
@@ -923,9 +908,19 @@ public class EmployeeApplication {
                                                    """);
                                    DisplayUtil.tableForNonCount(empLog);
                                }
+                               case 5 -> {
+                                   DisplayUtil.printNewLine("""
+                                                   |-----------------------------|
+                                                   |    SEND REQUEST TO ADMIN    |    
+                                                   |-----------------------------|
+                                                   """);
+                                   String request = InputUtil.getText("Dear "+ empLog.getName() +" Pleas write your request : ");
+                                   DisplayUtil.printNewLine("Message request send successfully");
+                                   employeeService.sendRequestToAdmin(empLog , request);
+                               }
 
                                case 0 -> backToMain = false;
-                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 4 ");
+                               default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 5 ");
                            }
                        }while(backToMain);
                    }else {
@@ -933,7 +928,7 @@ public class EmployeeApplication {
                    }
                 }
                 case 0 -> System.exit(0);
-                default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 2 ");
+                default -> DisplayUtil.printNewLine("Invalid Option!! Please Enter option from 0 -> 5 ");
             }
         }while(true);
     }

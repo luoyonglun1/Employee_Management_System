@@ -29,6 +29,7 @@ public class DisplayUtil {
             9. Salary filtering 
             10. View Employee attendance  
             11. Set Permission Or Absent 
+            12. Get request from Employee
             0. Back to the Login
             """;
     public final static  String SearchOpt = """
@@ -45,6 +46,7 @@ public class DisplayUtil {
             2. View performance rating
             3. Take attendance
             4. View personal information
+            5. Any request to Admin
             0. Back to the Login
             """;
     public final static String Ratingmenu = """
@@ -191,6 +193,29 @@ public class DisplayUtil {
         }
         DisplayUtil.printNewLine(table.render());
     }
+
+
+    public static void tableForGetRequest(List<Employee> employees) {
+        Table table = new Table(5, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+        table.addCell("ID");
+        table.addCell("NAME");
+        table.addCell("DEPARTMENT");
+        table.addCell("POSITION");
+        table.addCell("REQUEST");
+        for (Employee employee : employees) {
+
+            if (employee.getRequestToAdmin() != null){
+                table.addCell(employee.getId().toString());
+                table.addCell(employee.getName());
+                table.addCell(employee.getDepartment());
+                table.addCell(employee.getPosition());
+                table.addCell(employee.getRequestToAdmin());
+            }
+        }
+
+        DisplayUtil.printNewLine(table.render());
+    }
+
 
     public static void tableOneRow(String inputOne , String inputTwo) {
         Table table = new Table(2, BorderStyle.UNICODE_ROUND_BOX_WIDE);

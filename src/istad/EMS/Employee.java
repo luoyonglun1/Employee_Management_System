@@ -17,6 +17,8 @@ public class Employee {
     private String userName ;
     private String password ;
     private Integer performancerating ;
+    private String requestToAdmin ;
+
 
 
 
@@ -56,6 +58,14 @@ public class Employee {
         this.attendance = attendance;
         this.userName = userName ;
         this.password = password ;
+    }
+
+    public String getRequestToAdmin() {
+        return requestToAdmin;
+    }
+
+    public void setRequestToAdmin(String requestToAdmin) {
+        this.requestToAdmin = requestToAdmin;
     }
 
     public Integer getPerformancerating() {

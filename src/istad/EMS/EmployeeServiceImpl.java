@@ -218,4 +218,12 @@ public void updateEmployeeByID(Integer id, Employee newEmployee) {
                 })
                 .toList();
     }
+
+    @Override
+    public void sendRequestToAdmin(Employee employee , String request) {
+        employee.setRequestToAdmin(request);
+    }
+
+
+
 }
