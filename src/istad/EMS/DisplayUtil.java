@@ -202,22 +202,41 @@ public class DisplayUtil {
         table.addCell("DEPARTMENT");
         table.addCell("POSITION");
         table.addCell("REQUEST");
-        for (Employee employee : employees) {
+//        for (Employee employee : employees) {
+//
+//            if (employee.getRequestToAdmin() != null){
+//                table.addCell(employee.getId().toString());
+//                table.addCell(employee.getName());
+//                table.addCell(employee.getDepartment());
+//                table.addCell(employee.getPosition());
+//                table.addCell(employee.getRequestToAdmin());
+//                Boolean isTrue = employee.getRequestToAdmin() != null;
+//                    if (!isTrue){
+//                        System.out.println("There are no Employee request message.");
+//                        return ;
+//                    }
+//
+//            }
+//
+//        }
+        boolean hasRequest = false;
 
-            if (employee.getRequestToAdmin() != null){
+        for (Employee employee : employees) {
+            if (employee.getRequestToAdmin() != null) {
+                hasRequest = true;
                 table.addCell(employee.getId().toString());
                 table.addCell(employee.getName());
                 table.addCell(employee.getDepartment());
                 table.addCell(employee.getPosition());
                 table.addCell(employee.getRequestToAdmin());
-
-
-            }
-            else{
-                System.out.println("There are no Employee request message.");
-                return ;
             }
         }
+
+        if (!hasRequest) {
+            System.out.println("There are no Employee request messages.");
+            return;
+        }
+
 
         DisplayUtil.printNewLine(table.render());
     }
