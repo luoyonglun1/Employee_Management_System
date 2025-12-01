@@ -130,13 +130,22 @@ public List<Employee> FilteringNotYetRating() {
 public void updateEmployeeByID(Integer id, Employee newEmployee) {
     DisplayUtil.printNewLine("Enter your Birth Date! ");
 
+//    int year;
+//    do {
+//        year = InputUtil.getInteger("Enter your birth year : ");
+//        if (year >= 1950 && year <= 2025) {
+//            System.out.println("Year must be less than 2025.");
+//        }
+//    } while (year >= 1950 && year <= 2025);
+
     int year;
     do {
         year = InputUtil.getInteger("Enter your birth year : ");
-        if (year >= 2025) {
-            System.out.println("Year must be less than 2025.");
+        if (year < 1950 || year > 2025) {
+            System.out.println(" Year must be between 1950 and 2025.");
         }
-    } while (year >= 2025);
+    } while (year < 1950 || year > 2025);
+
 
     int month;
     do {
